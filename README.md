@@ -9,13 +9,13 @@ Feel free to contribute to this repository or use it as a playground for your co
 2. **Clone the Forked Repository:** Clone the forked repository to your local machine using the `git clone` command.
 
     ```bash
-    git clone https://github.com/Joshbam-joshwilly/1_project_per_week.git
+    git clone https://github.com/Joshua-Coded/1_project_per_week.git
     ```
 
 3. **Add Upstream Remote:** Add the original repository (upstream) as a remote to keep your local copy in sync with the main project.
 
     ```bash
-    git remote add upstream https://github.com/Joshbam-joshwilly/1_project_per_week.git
+    git remote add upstream https://github.com/Joshua-Coded/1_project_per_week.git
     ```
 
 4. **Create a Branch:** Create a new branch in your name.

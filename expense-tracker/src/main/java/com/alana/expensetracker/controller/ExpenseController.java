@@ -15,10 +15,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/expense")
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 public class ExpenseController {
 
     private final ExpenseService expenseService;
+
+    public ExpenseController(ExpenseService expenseService) {
+        this.expenseService = expenseService;
+    }
 
     @PostMapping
     public ResponseEntity<Void> addExpense(@RequestBody ExpenseDto expenseDto) throws MalformedURLException, URISyntaxException {
@@ -34,8 +38,8 @@ public class ExpenseController {
 
     @PutMapping
     @ResponseStatus(HttpStatus.OK)
-    public void updateExpense(@RequestBody ExpenseDto expenseDto) {
-        expenseService.updatExpense(expense);
+    public void updateExpense(@RequestBody ExpenseDto expense) {
+        expenseService.updateExpense(expense);
     }
 
     @GetMapping
@@ -52,7 +56,7 @@ public class ExpenseController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteExpense(PathVariable String id){
+    public void deleteExpense(@PathVariable String id) {
         expenseService.deleteExpense(id);
     }
 }

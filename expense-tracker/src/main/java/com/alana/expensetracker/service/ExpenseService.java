@@ -6,6 +6,7 @@ import com.alana.expensetracker.exception.ExpenseNotFoundException;
 import com.alana.expensetracker.model.Expense;
 import com.alana.expensetracker.repository.ExpenseRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -16,7 +17,12 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class ExpenseService {
+    @Autowired
     private ExpenseRepository expenseRepository;
+
+    public ExpenseService(ExpenseRepository expenseRepository) {
+        this.expenseRepository = expenseRepository;
+    }
 
     public String addExpense(ExpenseDto expenseDto) {
         Expense expense = mapFromDto(expenseDto);
@@ -26,12 +32,11 @@ public class ExpenseService {
     public void updateExpense(ExpenseDto expenseDto) {
         Expense expense = mapFromDto(expenseDto);
         Expense savedExpense = expenseRepository.findById(expenseDto.getId()).
-                orElseThrow(()-> new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST,
                         String.format("Cannot Find Expense by ID %s", expense.getId())));
         savedExpense.setExpenseName(expense.getExpenseName());
         savedExpense.setExpenseCategory(expense.getExpenseCategory());
         savedExpense.setExpenseAmount(expense.getExpenseAmount());
-
         expenseRepository.save(savedExpense);
     }
 
@@ -57,7 +62,7 @@ public class ExpenseService {
                 .id(expense.getId())
                 .expenseName(expense.getExpenseName())
                 .expenseCategory(expense.getExpenseCategory())
-                .amount(expense.getExpenseAmount())
+                .expenseAmount(expense.getExpenseAmount())
                 .build();
     }
 
@@ -65,7 +70,7 @@ public class ExpenseService {
         return Expense.builder()
                 .expenseName(expense.getExpenseName())
                 .expenseCategory(expense.getExpenseCategory())
-                .expenseAmount(expense.getAmount())
+                .expenseAmount(expense.getExpenseAmount())
                 .build();
     }
 }

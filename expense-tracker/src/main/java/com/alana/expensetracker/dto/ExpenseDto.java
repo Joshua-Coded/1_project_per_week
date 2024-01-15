@@ -25,5 +25,5 @@ public class ExpenseDto {
     private String expenseName;
     private ExpenseCategory expenseCategory;
     @Min(value = 0)
-    private BigDecimal amount;
+    private BigDecimal expenseAmount;
 }

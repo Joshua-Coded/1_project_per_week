@@ -25,6 +25,4 @@ public class Expense {
     private ExpenseCategory expenseCategory;
     @Field("amount")
     private BigDecimal expenseAmount;
-
-
 }
